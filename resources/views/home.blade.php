@@ -95,7 +95,7 @@
                         <tr>
                             <td width="35%"><i class="fa fa-calendar"></i>&nbsp; &nbsp;Date</td>
                             <td width="35%"><i class="fa fa-arrow-up"></i>&nbsp; &nbsp;Check In/Out</td>
-                            <td width="35%"><i class="fa fa-comment"></i>&nbsp; &nbsp;ID</td>
+                            <td width="35%"><i class="fa fa-comment"></i>&nbsp; &nbsp;Name</td>
                         </tr>
                     </table>
                 </div>
