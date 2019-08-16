@@ -77,7 +77,7 @@ class BleEvent implements ShouldBroadcast
             );
 
             if($absenid){
-                $absen = DB::table('absens')->join('users','absens.user_id','users.id')->where('id',$absenid)->first();
+                $absen = DB::table('absens')->join('users','absens.user_id','users.id')->select('users.id','users.name','absens.check_in')->where('id',$absenid)->first();
                 
                 $data  = [
                             'id' => $absen->id,
