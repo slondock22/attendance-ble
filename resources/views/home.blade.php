@@ -114,7 +114,7 @@
                         <div class="fl-card-header2">
                             <table class="fl-table-header" cellpadding="7">
                                 <tr>
-                                    <td width="40%"><i class="fa fa-truck"></i>&nbsp; &nbsp;Truck</td>
+                                    <td width="20%"><i class="fa fa-truck"></i>&nbsp; &nbsp;Truck</td>
                                     <td align="center" width="20%"><i class="fa fa-calendar"></i>&nbsp; &nbsp;Date</td>
                                     <td align="center" width="20%"><i class="fa fa-arrow-up"></i>&nbsp; &nbsp;Gate In/Out</td>
                                     <td align="center" width="15%"><i class="fa fa-star"></i>&nbsp; &nbsp;Status</td>
@@ -153,7 +153,7 @@
        else if(data.type == 'attendance'){
             var date = data.data.date;
             var check_in = data.data.check_in;
-            var row = "<tr><td>" + date + "</td><td>" + check_in + "</td><td>-</td> </tr>";
+            var row = "<tr><td width='35%'>" + date + "</td><td width='35%'>" + check_in + "</td><td width='25%'>-</td> </tr>";
             $("#attendance_table").append(row);
 
        }else if(data.type == 'gate'){
@@ -161,8 +161,8 @@
             var gate_in = data.data.gate_in;
             var img = data.data.img;
             var minor = data.data.minor;
-            
-            var row = "<tr><td>" + minor + "</td><td>" + date + "</td><td>" + gate_in + "</td><td><img src='../img/" + img + "'/></td> </tr>";
+
+            var row = "<tr><td width='20%'>" + minor + "</td><td width='20%'>" + date + "</td><td width='20%'>" + gate_in + "</td><td width='15%'><img src='../img/" + img + "'/></td> </tr>";
             $("#gate_table").append(row);
        }
 
