@@ -104,7 +104,8 @@ class BleEvent implements ShouldBroadcast
                 'id' => $gate->id,
                 'gate_in' => date('H:i:s', strtotime($gate->gate_in)),
                 'date' => date('Y/m/d', strtotime($gate->gate_in)),
-                'img' => $img
+                'img' => $img,
+                'minor' => $minor
             ];
             
             return $data;

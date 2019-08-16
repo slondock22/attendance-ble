@@ -115,6 +115,7 @@
                             <table class="fl-table-header" cellpadding="7">
                                 <tr>
                                     <td width="40%"><i class="fa fa-truck"></i>&nbsp; &nbsp;Truck</td>
+                                    <td align="center" width="20%"><i class="fa fa-calendar"></i>&nbsp; &nbsp;Date</td>
                                     <td align="center" width="20%"><i class="fa fa-arrow-up"></i>&nbsp; &nbsp;Gate In/Out</td>
                                     <td align="center" width="15%"><i class="fa fa-star"></i>&nbsp; &nbsp;Status</td>
                                 </tr>
@@ -159,7 +160,9 @@
             var date = data.data.date;
             var gate_in = data.data.gate_in;
             var img = data.data.img;
-            var row = "<tr><td>" + date + "</td><td>" + gate_in + "</td><td><img src='../img/" + img + "'/></td> </tr>";
+            var minor = data.data.minor;
+            
+            var row = "<tr><td>" + minor + "</td><td>" + date + "</td><td>" + gate_in + "</td><td><img src='../img/" + img + "'/></td> </tr>";
             $("#gate_table").append(row);
        }
 
