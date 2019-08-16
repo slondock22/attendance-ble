@@ -157,8 +157,9 @@
 
        }else if(data.type == 'gate'){
             var date = data.data.date;
-            var check_in = data.data.gate_in;
-            var row = "<tr><td>" + date + "</td><td>" + gate_in + "</td><td>-</td> </tr>";
+            var gate_in = data.data.gate_in;
+            var img = data.data.img;
+            var row = "<tr><td>" + date + "</td><td>" + gate_in + "</td><td><img src='../img/" + img + "'/></td> </tr>";
             $("#gate_table").append(row);
        }
 

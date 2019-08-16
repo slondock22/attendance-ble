@@ -37,7 +37,7 @@ class BleEvent implements ShouldBroadcast
         $this->minor    = $minor;
         $this->type     = $type;
         $this->id_profile     = $id_profile;
-        $this->data = $this->getData($type, $id_profile);
+        $this->data = $this->getData($type, $id_profile, $minor);
     }
 
     /**
@@ -56,7 +56,9 @@ class BleEvent implements ShouldBroadcast
         return 'BleEvent';
     }
 
-    public function getData($type, $id_profile){
+    public function getData($type, $id_profile, $minor){
+
+    //   dd($id_profile);
      
         if($type == 'profile'){
             $profile = User::findOrFail($id_profile);
@@ -68,7 +70,7 @@ class BleEvent implements ShouldBroadcast
             ];
             return $data;
         }
-        elseif($type = 'attendance'){
+        elseif($type == 'attendance'){
             $absenid = DB::table('absens')->insertGetId(
                                                 ['user_id' => $id_profile,
                                                 'check_in' => date('Y-m-d H:i:s')]
@@ -85,16 +87,24 @@ class BleEvent implements ShouldBroadcast
 
                 return $data;
             }
-        } elseif($type = 'gate'){
+        }
+        elseif($type == 'gate'){
             $gateid = DB::table('gates')->insertGetId(
                                         ['user_id' => $id_profile,
                                         'gate_in' => date('Y-m-d H:i:s')]
                         );
+            // dd($gate    id);
             $gate = DB::table('gates')->where('id',$gateid)->first();
+            if($minor == 361){
+                $img = 'checked.png';
+            } else {
+                $img = 'cancel.png';
+            }
             $data = [
                 'id' => $gate->id,
                 'gate_in' => date('H:i:s', strtotime($gate->gate_in)),
-                'date' => date('Y/m/d', strtotime($gate->gate_in))
+                'date' => date('Y/m/d', strtotime($gate->gate_in)),
+                'img' => $img
             ];
             
             return $data;
