@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use Image;
 use File;
-
+use DB;
 
 class HomeController extends Controller
 {
@@ -42,6 +42,42 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function ble(Request $request){
+        $uuid        = $request->uuid;
+        $major       = $request->major;
+        $minor       = $request->minor;
+        $type        = $request->type;
+        $id_profile  = $request->id_profile;
+
+        if($type == 'PROFILE' || $type == 'profile'){
+            $profile = User::findOrFail($id_profile);
+            $data = [
+                        'id'   => $profile->id,
+                        'name' => $profile->name,
+                        'date_of_birth' => $profile->date_of_birth,
+                        'email' => $profile->email
+            ];
+            // dd($data);
+        }
+        elseif($type == 'ATTENDANCE' || $type = 'attendance'){
+            $absenid = DB::table('absens')->insertGetId(
+                                                ['user_id' => $id_profile,
+                                                'check_in' => date('Y-m-d H:i:s')]
+            );
+
+            if($absenid){
+                $absen = DB::table('absens')->where('id',$absenid)->first();
+                $data  = [
+                            'id' => $absen->id,
+                            'check_in' => $absen->check_in
+                ];
+            }
+        }
+
+        dd($data);
+        event(new BleEvent($uuid, $major, $minor, $type, $type, $id_profile, $data));
+        return response()->json('success',200);
+    }
   
 
     public function registration(Request $request){
@@ -81,21 +117,53 @@ class HomeController extends Controller
 
         $id_profile = $save->id;
 
-        $data = [
-            'message' => 'succeess',
-            'id_profile' => $id_profile,
-        ];
+        if($save){
+            $data = [
+                'message' => 'Success',
+                'id_profile' => $id_profile,
+            ];
+            $code = 200;
+        }else{
+            $data = [
+                'message' => 'Error When Inserting'
+            ];
+            $code = 500;
+        }
+       
 
-        return response()->json($data,200);
+        return response()->json($data,$code);
     }
 
-    public function ble(Request $request){
-        $uuid   = $request->uuid;
-        $major  = $request->major;
-        $minor  = $request->minor;
-        $type   = $request->type;
+    public function getProfile(Request $request){
 
-        event(new BleEvent($uuid, $major, $minor, $type));
-        return response()->json('success',200);
+        $validator = Validator::make($request->all(),[
+            'id_profile'      => 'required|string|max:1',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
+        }
+
+        $user = User::findOrFail($request->id_profile);
+        
+        if($user){
+            $data = [
+                'message' => 'Success',
+                'id'    => $user->id,
+                'name' => $user->name,
+                'date_of_birth' => $user->date_of_birth,
+                'email' => $user->email
+            ];
+            $code = 200;
+        }else{
+            $data = [
+                'message' => 'Data Not Found'
+            ];
+            $code = 500;
+        }
+
+        return response()->json($data,$code);
     }
+
 }

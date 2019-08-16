@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/ble','HomeController@ble');
 Route::post('/registration','HomeController@registration');
+Route::post('/getProfile','HomeController@getProfile');

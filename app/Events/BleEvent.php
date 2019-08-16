@@ -18,19 +18,24 @@ class BleEvent implements ShouldBroadcast
     public $major;
     public $minor;
     public $type;
+    public $id_profile;
+    public $data;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($uuid, $major, $minor, $type)
+    public function __construct($uuid, $major, $minor, $type, $id_profile, $data)
     {
         //
+        // dd($data);
         $this->uuid     = $uuid;
         $this->major    = $major;
         $this->minor    = $minor;
         $this->type     = $type;
+        $this->id_profile     = $id_profile;
+        $this->data = $data;
     }
 
     /**

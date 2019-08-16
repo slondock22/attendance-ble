@@ -168,9 +168,9 @@
     var channel = pusher.subscribe('blereceiver');
       
     channel.bind('BleEvent', function(data) {
-//          
-            console.log(data);
-            alert('hai');
+//         
+        console.log(data);
+           
     });
 </script>
 @endsection
