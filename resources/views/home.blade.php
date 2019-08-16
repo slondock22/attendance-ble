@@ -154,8 +154,9 @@
             var date = data.data.date;
             var check_in = data.data.check_in;
             var id_profile = data.id_profile;
+            var name = data.data.name;
 
-            var row = "<tr><td width='35%'>" + date + "</td><td width='35%'>" + check_in + "</td><td width='35%'>"+id_profile+"</td> </tr>";
+            var row = "<tr><td width='35%'>" + date + "</td><td width='35%'>" + check_in + "</td><td width='35%'>"+name+"</td> </tr>";
             $("#attendance_table").append(row);
 
        }else if(data.type == 'gate'){
