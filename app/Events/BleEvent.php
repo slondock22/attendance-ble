@@ -9,6 +9,8 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\User;
+use DB;
 
 class BleEvent implements ShouldBroadcast
 {
@@ -26,7 +28,7 @@ class BleEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($uuid, $major, $minor, $type, $id_profile, $data)
+    public function __construct($uuid, $major, $minor, $type, $id_profile)
     {
         //
         // dd($data);
@@ -35,7 +37,7 @@ class BleEvent implements ShouldBroadcast
         $this->minor    = $minor;
         $this->type     = $type;
         $this->id_profile     = $id_profile;
-        $this->data = $data;
+        $this->data = $this->getData($type, $id_profile);
     }
 
     /**
@@ -52,5 +54,38 @@ class BleEvent implements ShouldBroadcast
     public function broadcastAs()
     {
         return 'BleEvent';
+    }
+
+    public function getData($type, $id_profile){
+     
+        if($type == 'profile'){
+            $profile = User::findOrFail($id_profile);
+            $data = [
+                        'id'   => $profile->id,
+                        'name' => $profile->name,
+                        'date_of_birth' => $profile->date_of_birth,
+                        'email' => $profile->email
+            ];
+            return $data;
+        }
+        elseif($type = 'attendance'){
+            $absenid = DB::table('absens')->insertGetId(
+                                                ['user_id' => $id_profile,
+                                                'check_in' => date('Y-m-d H:i:s')]
+            );
+
+            if($absenid){
+                $absen = DB::table('absens')->where('id',$absenid)->first();
+                
+                $data  = [
+                            'id' => $absen->id,
+                            'check_in' => date('H:i:s', strtotime($absen->check_in)),
+                            'date' => date('Y/m/d', strtotime($absen->check_in))
+                ];
+
+                return $data;
+            }
+        }
+
     }
 }

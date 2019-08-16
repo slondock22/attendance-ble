@@ -74,15 +74,15 @@
                     <img src="{{asset('img/boy.png')}}" class="mx-auto d-block rounded-circle img-thumbnail mb-10">
                     <div class="profile-labels">Fullname</div>
                     <div class="profile-details">
-                        Andi Barusman
+                        <span id="name">Andi Barusman</span>
                     </div>
                     <div class="profile-labels">Date of Birth</div>
                     <div class="profile-details"> 
-                        15 Agustus 2019
+                            <span id="date_of_birth">15 Agustus 2019</span>
                     </div>
                     <div class="profile-labels">Emails</div>
                     <div class="profile-details"> 
-                        barusmancodot@gmail.com
+                            <span id="email">barusmancodot@gmail.com</span>
                     </div>
                 </div>
             </div>
@@ -100,20 +100,9 @@
                     </table>
                 </div>
                 <div class="fl-card-body">
-                    <table class="fl-table">
+                    <table class="fl-table" id="attendance_table">
                        <tbody>
-                           @for($i=0;$i<=10;$i++)
-                                @if($i%2==0)
-                                    @php $color = "#f3f3f3";@endphp
-                                @else
-                                    @php $color = "#fff";@endphp
-                                @endif
-                            <tr style="background-color:{{$color}}">
-                            <td width="35%" scope="row">2019 Aug 06</td>
-                            <td width="35%">09:15:00</td>
-                            <td width="25%">-</td>
-                            </tr>
-                            @endfor
+                          
                         </tbody>
                     </table>
                 </div>
@@ -169,7 +158,17 @@
       
     channel.bind('BleEvent', function(data) {
 //         
-        console.log(data);
+       if(data.type == 'profile'){
+            $('#name').html(data.data.name);
+            $('#date_of_birth').html(data.data.date_of_birth);
+            $('#email').html(data.data.email);
+       }
+       else if(data.type == 'attendance'){
+            var date = data.data.date;
+            var check_in = data.data.check_in;
+            var row = "<tr><td>" + date + "</td><td>" + check_in + "</td><td>-</td> </tr>";
+            $("#attendance_table").append(row);
+       }
            
     });
 </script>

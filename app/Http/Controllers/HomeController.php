@@ -49,33 +49,7 @@ class HomeController extends Controller
         $type        = $request->type;
         $id_profile  = $request->id_profile;
 
-        if($type == 'PROFILE' || $type == 'profile'){
-            $profile = User::findOrFail($id_profile);
-            $data = [
-                        'id'   => $profile->id,
-                        'name' => $profile->name,
-                        'date_of_birth' => $profile->date_of_birth,
-                        'email' => $profile->email
-            ];
-            // dd($data);
-        }
-        elseif($type == 'ATTENDANCE' || $type = 'attendance'){
-            $absenid = DB::table('absens')->insertGetId(
-                                                ['user_id' => $id_profile,
-                                                'check_in' => date('Y-m-d H:i:s')]
-            );
-
-            if($absenid){
-                $absen = DB::table('absens')->where('id',$absenid)->first();
-                $data  = [
-                            'id' => $absen->id,
-                            'check_in' => $absen->check_in
-                ];
-            }
-        }
-
-        dd($data);
-        event(new BleEvent($uuid, $major, $minor, $type, $type, $id_profile, $data));
+        event(new BleEvent($uuid, $major, $minor, $type, $id_profile));
         return response()->json('success',200);
     }
   
