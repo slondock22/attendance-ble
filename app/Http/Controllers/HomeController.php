@@ -85,7 +85,7 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(),[
             'name'      => 'required|string',
             'date_of_birth'     => 'required|date_format:Y-m-d',
-            'filepath' => 'required|image|mimes:jpg,png,jpeg',
+            // 'filepath' => 'required|image|mimes:jpg,png,jpeg',
             'email' => 'required|string|email|max:255|unique:users',
 
         ]);
