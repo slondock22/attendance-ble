@@ -100,18 +100,18 @@ class HomeController extends Controller
             File::makeDirectory($this->path);
         }
         
-        $file = $request->file('filepath');
-        $filename = $file->getClientOriginalName();
-        $filepath = $this->path.'/'.$filename;
+        // $file = $request->file('filepath');
+        // $filename = $file->getClientOriginalName();
+        // $filepath = $this->path.'/'.$filename;
 
-        Image::make($file)->save($filepath);
+        // Image::make($file)->save($filepath);
 
 
         $save = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'date_of_birth' => $request->date_of_birth,
-            'filepath' => $filename,
+            // 'filepath' => $filename,
             'password' => Hash::make('admin123'),
         ]);
 
