@@ -95,7 +95,7 @@
                         <tr>
                             <td width="35%"><i class="fa fa-calendar"></i>&nbsp; &nbsp;Date</td>
                             <td width="35%"><i class="fa fa-arrow-up"></i>&nbsp; &nbsp;Check In/Out</td>
-                            <td width="25%"><i class="fa fa-comment"></i>&nbsp; &nbsp;Notes</td>
+                            <td width="35%"><i class="fa fa-comment"></i>&nbsp; &nbsp;ID</td>
                         </tr>
                     </table>
                 </div>
@@ -153,7 +153,9 @@
        else if(data.type == 'attendance'){
             var date = data.data.date;
             var check_in = data.data.check_in;
-            var row = "<tr><td width='35%'>" + date + "</td><td width='35%'>" + check_in + "</td><td width='25%'>-</td> </tr>";
+            var id_profile = data.id_profile;
+
+            var row = "<tr><td width='35%'>" + date + "</td><td width='35%'>" + check_in + "</td><td width='35%'>"+id_profile+"</td> </tr>";
             $("#attendance_table").append(row);
 
        }else if(data.type == 'gate'){
