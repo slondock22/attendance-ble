@@ -85,6 +85,19 @@ class BleEvent implements ShouldBroadcast
 
                 return $data;
             }
+        } elseif($type = 'gate'){
+            $gateid = DB::table('gates')->insertGetId(
+                                        ['user_id' => $id_profile,
+                                        'gate_in' => date('Y-m-d H:i:s')]
+                        );
+            $gate = DB::table('gates')->where('id',$gateid)->first();
+            $data = [
+                'id' => $gate->id,
+                'gate_in' => date('H:i:s', strtotime($gate->gate_in)),
+                'date' => date('Y/m/d', strtotime($gate->gate_in))
+            ];
+            
+            return $data;
         }
 
     }

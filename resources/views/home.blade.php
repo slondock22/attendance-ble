@@ -122,23 +122,9 @@
                         </div>
 
                     <div class="fl-card-body">
-                        <table class="fl-table">
+                        <table class="fl-table" id="gate_table">
                             <tbody>
-                                @for($i=0;$i<=9;$i++)
-                                    @if($i%2==0)
-                                <tr>
-                                <td width="40%" scope="row">c8bd08fb-756d-4c9e-8d0a-13238</td>
-                                <td align="center" width="20%">09:15:00</td>
-                                <td width="15%" align="center"><img src="{{asset('img/checked.png')}}"></td>
-                                </tr>
-                                    @else
-                                <tr>
-                                <td scope="row">c8bd08fb-756d-4c9e-8d0a-13878</td>
-                                <td align="center">09:15:00</td>
-                                <td align="center"><img src="{{asset('img/cancel.png')}}"></td>
-                                </tr>
-                                    @endif
-                                @endfor
+                                
                             </tbody>
                         </table>
                     </div>
@@ -168,7 +154,14 @@
             var check_in = data.data.check_in;
             var row = "<tr><td>" + date + "</td><td>" + check_in + "</td><td>-</td> </tr>";
             $("#attendance_table").append(row);
+
+       }else if(data.type == 'gate'){
+            var date = data.data.date;
+            var check_in = data.data.gate_in;
+            var row = "<tr><td>" + date + "</td><td>" + gate_in + "</td><td>-</td> </tr>";
+            $("#gate_table").append(row);
        }
+
            
     });
 </script>
