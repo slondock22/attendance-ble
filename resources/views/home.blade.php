@@ -133,15 +133,15 @@
                             <img src="{{asset('img/boy.png')}}" class="mx-auto d-block rounded-circle img-thumbnail mb-10">
                             <div class="profile-labels">Fullname</div>
                             <div class="profile-details">
-                                <span id="name">Andi Barusman</span>
+                                <span id="name"></span>
                             </div>
                             <div class="profile-labels">Date of Birth</div>
                             <div class="profile-details"> 
-                                    <span id="date_of_birth">15 Agustus 2019</span>
+                                    <span id="date_of_birth"></span>
                             </div>
                             <div class="profile-labels">Emails</div>
                             <div class="profile-details"> 
-                                    <span id="email">barusmancodot@gmail.com</span>
+                                    <span id="email"></span>
                             </div>
                         </div>
                     </div>
