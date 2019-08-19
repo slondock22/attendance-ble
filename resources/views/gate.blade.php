@@ -116,9 +116,9 @@
         <div class="col-md-12">
                 <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-profile-tab" href="{{url('/')}}">Profile</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" href="{{url('/')}}">Profile</a>
                         <a class="nav-item nav-link" id="nav-attendance-tab" href="{{url('/attendance')}}">Attendance</a>
-                        <a class="nav-item nav-link" id="nav-gate-tab" href="{{url('/gate')}}">Gate</a>
+                        <a class="nav-item nav-link active" id="nav-gate-tab" href="{{url('/gate')}}">Gate</a>
                     </div>
                 </nav>
         </div>
@@ -126,7 +126,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div class="fl-card mt-10">
                         {{-- <div class="fl-card-header">Profile</div>                 --}}
                         <div class="fl-card-body" style="padding-top:40px; padding-bottom:70px">
@@ -168,11 +168,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="nav-gate" role="tabpanel" aria-labelledby="nav-gate-tab">   
+                <div class="tab-pane fade show active" id="nav-gate" role="tabpanel" aria-labelledby="nav-gate-tab">   
                     <div class="fl-card mt-10">
                         {{-- <div class="fl-card-header">Automation Gate</div> --}}
                         <div class="fl-card-header2">
-                            <table class="fl-table-header">
+                            <table class="fl-table-header" cellpadding="7">
                                 <tr>
                                     <td width="20%"><i class="fa fa-truck"></i>&nbsp; &nbsp;Truck</td>
                                     <td align="center" width="20%"><i class="fa fa-calendar"></i>&nbsp; &nbsp;Date</td>
@@ -219,7 +219,7 @@
             var id_profile = data.id_profile;
             var name = data.data.name;
 
-            var row = "<tr><td width='35%'>" + date + "</td><td align='center' width='35%'>" + check_in + "</td><td align='center' width='35%'>"+name+"</td> </tr>";
+            var row = "<tr><td width='35%'>" + date + "</td><td width='35%'>" + check_in + "</td><td width='35%'>"+name+"</td> </tr>";
             $("#attendance_table").append(row);
 
        }else if(data.type == 'gate'){
@@ -228,7 +228,7 @@
             var img = data.data.img;
             var minor = data.data.minor;
 
-            var row = "<tr><td width='20%'>" + minor + "</td><td align='center' width='20%'>" + date + "</td><td align='center' width='20%'>" + gate_in + "</td><td align='center' width='15%'><img src='../img/" + img + "'/></td> </tr>";
+            var row = "<tr><td width='20%'>" + minor + "</td><td width='20%'>" + date + "</td><td width='20%'>" + gate_in + "</td><td width='15%'><img src='../img/" + img + "'/></td> </tr>";
             $("#gate_table").append(row);
        }
 

@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/attendance', 'HomeController@attendance');
+Route::get('/gate', 'HomeController@gate');
 
 Auth::routes();
 
