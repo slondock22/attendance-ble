@@ -69,7 +69,7 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(),[
             'name'      => 'required|string',
             'date_of_birth'     => 'required|date_format:Y-m-d',
-            // 'filepath' => 'required|image|mimes:jpg,png,jpeg',
+            'filepath' => 'required|image|mimes:jpg,png,jpeg',
             'email' => 'required|string|email|max:255|unique:users',
 
         ]);
@@ -79,23 +79,23 @@ class HomeController extends Controller
             return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
         }
         
-        //  //Create Directory if not exists
-        // if(!File::isDirectory($this->path)){
-        //     File::makeDirectory($this->path);
-        // }
+         //Create Directory if not exists
+        if(!File::isDirectory($this->path)){
+            File::makeDirectory($this->path);
+        }
         
-        // $file = $request->file('filepath');
-        // $filename = $file->getClientOriginalName();
-        // $filepath = $this->path.'/'.$filename;
+        $file = $request->file('filepath');
+        $filename = $file->getClientOriginalName();
+        $filepath = $this->path.'/'.$filename;
 
-        // Image::make($file)->save($filepath);
+        Image::make($file)->save($filepath);
 
 
         $save = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'date_of_birth' => $request->date_of_birth,
-            // 'filepath' => $filename,
+            'filepath' => $filename,
             'password' => Hash::make('admin123'),
         ]);
 
